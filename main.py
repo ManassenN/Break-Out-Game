@@ -4,6 +4,7 @@ from brick import *
 from ball import *
 import time
 NUMBER_OF_BRICKS = 52
+listen = True
 
 
 # TODO Set Up The Screen
@@ -20,12 +21,12 @@ screen.update()
 
 #TODO Add Functionalty To The Paddle (Left And Right)
 
+
 screen.listen()
 screen.onkey(paddle.move_left,'Left')
 screen.onkey(paddle.move_right,'Right')
 
 #TODO Creating The Bricks (With Different Colors)
-
 color_palette = ['#1572A1','#FF6464','#FFE162','#7900FF']
 bricks ={}
 
@@ -42,7 +43,7 @@ def brick_to_list(bricks, outter_loop, inner_loop, color_palette, k):
 
 
 bricks = brick_to_list(bricks=bricks,outter_loop=420,inner_loop=320,k=0,color_palette=color_palette)
-print(bricks[51])
+# print(bricks[51])
 
 #TODO Create Ball Class
 ball = Ball()
@@ -58,6 +59,13 @@ while game_is_on:
 #TODO Detect Paddle Collision With The Ball
     if paddle.distance(ball) < 100 and ball.ycor() < -299:
         ball.bounce_y()
+
+    # Insure That The Paddle Wont Be Able To Move Off Screen Display
+    if paddle.xcor() > 400:
+        paddle.goto(400,paddle.ycor())
+    if paddle.xcor() < -410:
+        paddle.goto(-410, paddle.ycor())
+
 
 #TODO Detect Wall Collision With The Ball
     if ball.ycor() > 320:

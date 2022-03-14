@@ -16,3 +16,6 @@ class Paddle(Turtle):
     def move_left(self):
         new_x = self.xcor() - 100
         self.goto(new_x,self.ycor())
+
+    def stay(self):
+        self.goto(self.xcor(),self.ycor())
